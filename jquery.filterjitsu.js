@@ -9,5 +9,19 @@
         factory(jQuery);
     }
 }(function($) {
-  console.log($);
+  /**
+   * filterjitsue plugin definition
+   * @param  {Object} options - options to be passed into the jQuery plugin
+   */
+  $.fn.filterjitsu = function(options) {
+    var defaults = {},
+        opts = $.extend({}, defaults, options),
+        $this = this;
+
+    function init() {
+      console.log('initializing');
+    }
+
+    init();
+  }
 }));
