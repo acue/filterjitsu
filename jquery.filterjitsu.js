@@ -133,11 +133,11 @@
   $.fn.filterjitsu = function (options) {
     var defaults = {},
         opts = $.extend({}, defaults, options),
-        params = parameters(),
         $this = this;
 
     function init() {
-      var queryString = buildQueryString(params);
+      var params = parameters(),
+          queryString = buildQueryString(params);
 
       hideUnmatchedRows($this, queryString);
       updateCount(queryString);
