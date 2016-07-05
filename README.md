@@ -19,5 +19,20 @@ Navigate to [http://localhost:3000](http://localhost:3000)
      * @type {String}
      */
     DATA_COUNT: '[data-count]'
+    /**
+     * jQuery selector for info
+     * @type {String}
+     */
+    INFO_SELECTOR: '.info',
+    /**
+     * jQuery selector for breadcrumb
+     * @type {String}
+     */
+    BREADCRUMB_SELECTOR: '.breadcrumb',
+    /**
+     * Array of video classifications
+     * @type {Array}
+     */
+    CATEGORIES: ['official', 'international', 'unofficial']
   };
 ```

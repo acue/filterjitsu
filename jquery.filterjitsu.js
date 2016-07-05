@@ -104,25 +104,25 @@
 
   /**
    * Replace or append an alert to the view
-   * @param  {Object} params - search query parameters from `parameters()`
+   * @param  {Object} params   - search query parameters from `parameters()`
+   * @param  {Object} settings - plugin settings
    */
-  function replaceOrAppendAlert (params) {
+  function replaceOrAppendAlert (params, settings) {
     var html,
-        categoryType = [],
-        categories = {};
+        categoryType = [];
 
     if (typeof params['type'] !== 'undefined' && params['type'] !== 'Video') {
       if (typeof params['category'] !== 'undefined') {
-        categoryType.push(categories[params['category']]);
+        categoryType.push(settings.CATEGORIES[params['category']]);
       }
 
       categoryType.push(params['type'].replace('Video', ' videos'));
       html = buildHtmlAlert(categoryType.join(' '), window.location.pathname);
 
-      if ($('#info').length > 0) {
-        $('#info').replaceWith(html);
+      if ($(settings.INFO_SELECTOR).length > 0) {
+        $(settings.INFO_SELECTOR).html(html);
       } else {
-        $('.breadcrumb').after(html);
+        $(settings.BREADCRUMB_SELECTOR).after(html);
       }
     }
   }
@@ -142,7 +142,7 @@
 
       hideUnmatchedRows($this, queryString);
       updateCount(queryString, settings);
-      replaceOrAppendAlert(params);
+      replaceOrAppendAlert(params, settings);
     }
 
     init();
@@ -158,7 +158,22 @@
      * jQuery selector for field to show count
      * @type {String}
      */
-    DATA_COUNT: '[data-count]'
+    DATA_COUNT: '[data-count]',
+    /**
+     * jQuery selector for info
+     * @type {String}
+     */
+    INFO_SELECTOR: '.info',
+    /**
+     * jQuery selector for breadcrumb
+     * @type {String}
+     */
+    BREADCRUMB_SELECTOR: '.breadcrumb',
+    /**
+     * Array of video classifications
+     * @type {Array}
+     */
+    CATEGORIES: ['official', 'international', 'unofficial']
   };
 
   $.fn.filterjitsu = Filterjitsu;
