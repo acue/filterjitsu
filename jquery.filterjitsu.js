@@ -149,7 +149,15 @@
   }
 
   Filterjitsu.defaults = {
+    /**
+     * jQuery selector for all filterable elements
+     * @type {String}
+     */
     DATA_FILTERABLE: '[data-filterable]',
+    /**
+     * jQuery selector for field to show count
+     * @type {String}
+     */
     DATA_COUNT: '[data-count]'
   };
 
