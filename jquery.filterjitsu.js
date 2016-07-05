@@ -11,6 +11,8 @@
         factory(jQuery);
     }
 }(function ($) {
+  var Filterjitsu; // declare function to assign to $.fn.filterjitsu
+
   /**
    * Extract search queries from url
    * @return {Array} list of strings of search queries
@@ -39,24 +41,24 @@
 
   /**
    * Build the jQuery selector for elements that do not match search query
-   * @param  {Object} params - search query parameters from `parameters()`
+   * @param  {Object} params   - search query parameters from `parameters()`
+   * @param  {Object} settings - plugin settings
    * @return {String} jQuery selector
    */
-  function buildQueryString (params) {
-    var DATA_FILTERABLE = '[data-filterable]',
-        selectorsArr = [],
+  function buildQueryString (params, settings) {
+    var selectorsArr = [],
         str = '',
         key;
 
     for (key in params) {
       if (params.hasOwnProperty(key) && params[key] !== 'Video') {
-        selectorsArr.push(DATA_FILTERABLE + '[data-' + key + '][data-' + key + '!=' + params[key] + ']');
+        selectorsArr.push(settings.DATA_FILTERABLE + '[data-' + key + '][data-' + key + '!=' + params[key] + ']');
       }
     }
 
     str = selectorsArr.join(', ');
 
-    return str === DATA_FILTERABLE ? '' : str;
+    return str === settings.DATA_FILTERABLE ? '' : str;
   }
 
   /**
@@ -75,16 +77,15 @@
 
   /**
    * Update the count of visible rows
-   * @param  {Object} queryString    - jQuery selector
+   * @param  {Object} queryString - jQuery selector
+   * @param  {Object} settings    - plugin settings
    * @return {Array} array of jQuery objects that match the `[data-count]`` selector
    */
-  function updateCount (queryString) {
-    var DATA_COUNT = '[data-count]',
-        DATA_FILTERABLE = '[data-filterable]',
-        count = $(DATA_FILTERABLE).length - $(queryString).length,
+  function updateCount (queryString, settings) {
+    var count = $(settings.DATA_FILTERABLE).length - $(queryString).length,
         videoText = (count === 1) ? 'video' : 'videos';
 
-    return $(DATA_COUNT).text(count + ' ' + videoText);
+    return $(settings.DATA_COUNT).text(count + ' ' + videoText);
   }
 
   /**
@@ -130,20 +131,27 @@
    * filterjitsue plugin definition
    * @param  {Object} options - options to be passed into the jQuery plugin
    */
-  $.fn.filterjitsu = function (options) {
-    var defaults = {},
-        opts = $.extend({}, defaults, options),
+  Filterjitsu = function (options) {
+    var defaults = $.fn.filterjitsu.defaults,
+        settings = $.extend({}, defaults, options),
         $this = this;
 
     function init() {
       var params = parameters(),
-          queryString = buildQueryString(params);
+          queryString = buildQueryString(params, settings);
 
       hideUnmatchedRows($this, queryString);
-      updateCount(queryString);
+      updateCount(queryString, settings);
       replaceOrAppendAlert(params);
     }
 
     init();
   }
+
+  Filterjitsu.defaults = {
+    DATA_FILTERABLE: '[data-filterable]',
+    DATA_COUNT: '[data-count]'
+  };
+
+  $.fn.filterjitsu = Filterjitsu;
 }));
