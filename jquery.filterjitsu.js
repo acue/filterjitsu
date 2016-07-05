@@ -38,34 +38,53 @@
   }
 
   /**
-   * Hide rows that do not match the desired data field
-   * @param  {Object} $filterjitsuEl - main jQuery object this plugin is called on
-   * @param  {Object} params   - search query parameters from `parameters()`
+   * Build the jQuery selector for elements that do not match search query
+   * @param  {Object} params - search query parameters from `parameters()`
+   * @return {String} jQuery selector
    */
-  function hideUnmatchedRows ($filterjitsuEl, params) {
-    var key;
+  function buildQueryString (params) {
+    var DATA_FILTERABLE = '[data-filterable]',
+        selectorsArr = [],
+        str = '',
+        key;
 
     for (key in params) {
       if (params.hasOwnProperty(key) && params[key] !== 'Video') {
-        // filter the elements that match `$('tbody tr')` by the
-        // `'[data-' + key + '!=' + params[key] + ']'` selector and hide the resulting rows
-        $filterjitsuEl
-          .filter('[data-' + key + '][data-' + key + '!=' + params[key] + ']')
-          .hide();
+        selectorsArr.push(DATA_FILTERABLE + '[data-' + key + '][data-' + key + '!=' + params[key] + ']');
       }
     }
+
+    str = selectorsArr.join(', ');
+
+    return str === DATA_FILTERABLE ? '' : str;
+  }
+
+  /**
+   * Hide rows that do not match the desired data field
+   * @param  {Object} $filterjitsuEl - main jQuery object this plugin is called on
+   * @param  {Object} queryString    - jQuery selector
+   * @return {Array} array of jQuery objects of elements hidden
+   */
+  function hideUnmatchedRows ($filterjitsuEl, queryString) {
+    // filter the elements that match the `'[data-filterable][data-' + key + '!=' + params[key] + ']'`
+    // selector and hide the resulting elements
+    return $filterjitsuEl
+      .filter(queryString)
+      .hide();
   }
 
   /**
    * Update the count of visible rows
+   * @param  {Object} queryString    - jQuery selector
+   * @return {Array} array of jQuery objects that match the `[data-count]`` selector
    */
-  function updateCount () {
-    var videoText,
-        count = $('tbody tr:visible').length; // todo (marcus) need new count mechanism
+  function updateCount (queryString) {
+    var DATA_COUNT = '[data-count]',
+        DATA_FILTERABLE = '[data-filterable]',
+        count = $(DATA_FILTERABLE).length - $(queryString).length,
+        videoText = (count === 1) ? 'video' : 'videos';
 
-    videoText = (count === 1) ? 'video' : 'videos';
-
-    $('#count').text(count + ' ' + videoText);
+    return $(DATA_COUNT).text(count + ' ' + videoText);
   }
 
   /**
@@ -118,8 +137,10 @@
         $this = this;
 
     function init() {
-      hideUnmatchedRows($this, params);
-      updateCount();
+      var queryString = buildQueryString(params);
+
+      hideUnmatchedRows($this, queryString);
+      updateCount(queryString);
       replaceOrAppendAlert(params);
     }
 
