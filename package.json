@@ -19,5 +19,13 @@
   "bugs": {
     "url": "https://github.com/Fullscreen/filterjitsu/issues"
   },
-  "homepage": "https://github.com/Fullscreen/filterjitsu#readme"
+  "homepage": "https://github.com/Fullscreen/filterjitsu#readme",
+  "devDependencies": {
+    "del": "^2.2.1",
+    "gulp": "^3.9.1",
+    "gulp-jshint": "^2.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.5.4",
+    "jshint": "^2.9.2"
+  }
 }
