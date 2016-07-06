@@ -1,15 +1,15 @@
-'use strict';
-
 (function (factory) {
-    if (typeof define === 'function' && define.amd) {
-        // AMD
-        define(['jquery'], factory);
-    } else if (typeof module === 'object' && module.exports) {
-        factory(require('jquery'));
-    } else {
-        // Browser globals
-        factory(jQuery);
-    }
+  'use strict';
+
+  if (typeof define === 'function' && define.amd) {
+      // AMD
+      define(['jquery'], factory);
+  } else if (typeof module === 'object' && module.exports) {
+      factory(require('jquery'));
+  } else {
+      // Browser globals
+      factory(jQuery);
+  }
 }(function ($) {
   var Filterjitsu; // declare function to assign to $.fn.filterjitsu
 
@@ -32,7 +32,7 @@
       var splitQuery = query.split('=');
 
       if (splitQuery.length === 2) {
-        results[splitQuery[0]] = splitQuery[1]
+        results[splitQuery[0]] = splitQuery[1];
       }
     });
 
@@ -111,12 +111,12 @@
     var html,
         categoryType = [];
 
-    if (typeof params['type'] !== 'undefined' && params['type'] !== 'Video') {
-      if (typeof params['category'] !== 'undefined') {
-        categoryType.push(settings.CATEGORIES[params['category']]);
+    if (typeof params.type !== 'undefined' && params.type !== 'Video') {
+      if (typeof params.category !== 'undefined') {
+        categoryType.push(settings.CATEGORIES[params.category]);
       }
 
-      categoryType.push(params['type'].replace('Video', ' videos'));
+      categoryType.push(params.type.replace('Video', ' videos'));
       html = buildHtmlAlert(categoryType.join(' '), window.location.pathname);
 
       if ($(settings.INFO_SELECTOR).length > 0) {
@@ -146,7 +146,7 @@
     }
 
     init();
-  }
+  };
 
   Filterjitsu.defaults = {
     /**
