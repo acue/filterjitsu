@@ -51,7 +51,7 @@
         key;
 
     for (key in params) {
-      if (params.hasOwnProperty(key) && params[key] !== 'Video') {
+      if (params.hasOwnProperty(key) && params[key] !== settings.ITEM_TYPE) {
         selectorsArr.push(settings.DATA_FILTERABLE + '[data-' + key + '][data-' + key + '!=' + params[key] + ']');
       }
     }
@@ -83,9 +83,9 @@
    */
   function updateCount (queryString, settings) {
     var count = $(settings.DATA_FILTERABLE).length - $(queryString).length,
-        videoText = (count === 1) ? 'video' : 'videos';
+        itemText = (count === 1) ? settings.ITEM_STRING : settings.ITEM_STRING + 's';
 
-    return $(settings.DATA_COUNT).text(count + ' ' + videoText);
+    return $(settings.DATA_COUNT).text(count + ' ' + itemText);
   }
 
   /**
@@ -94,10 +94,10 @@
    * @param  {String} pathname
    * @return {String} valid bootrap html for an alert
    */
-  function buildHtmlAlert(categoryType, pathname) {
+  function buildHtmlAlert(categoryType, pathname, settings) {
     return (
       '<div id="info" class="alert alert-info text-center col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">' +
-      '  You are viewing only ' + categoryType + '. <a href="' + pathname + '">View all videos.</a>' +
+      '  You are viewing only ' + categoryType + '. <a href="' + pathname + '">View all ' + settings.ITEM_STRING + 's.</a>' +
       '</div>'
     );
   }
@@ -111,13 +111,13 @@
     var html,
         categoryType = [];
 
-    if (typeof params.type !== 'undefined' && params.type !== 'Video') {
+    if (typeof params.type !== 'undefined' && params.type !== settings.ITEM_TYPE) {
       if (typeof params.category !== 'undefined') {
         categoryType.push(settings.CATEGORIES[params.category]);
       }
 
-      categoryType.push(params.type.replace('Video', ' videos'));
-      html = buildHtmlAlert(categoryType.join(' '), window.location.pathname);
+      categoryType.push(params.type.replace(settings.ITEM_TYPE, ' ' + settings.ITEM_STRING + 's'));
+      html = buildHtmlAlert(categoryType.join(' '), window.location.pathname, settings);
 
       if ($(settings.INFO_SELECTOR).length > 0) {
         $(settings.INFO_SELECTOR).html(html);
@@ -170,10 +170,20 @@
      */
     BREADCRUMB_SELECTOR: '.breadcrumb',
     /**
-     * Array of video classifications
+     * Array of item classifications
      * @type {Array}
      */
-    CATEGORIES: ['official', 'international', 'unofficial']
+    CATEGORIES: ['official', 'international', 'unofficial'],
+    /**
+     * Descriptive word for what things are being filtered
+     * @type {String}
+     */
+    ITEM_STRING: 'item',
+    /**
+     * URL param for type being filtered
+     * @type {String}
+     */
+    ITEM_TYPE: 'Item'
   };
 
   $.fn.filterjitsu = Filterjitsu;

@@ -78,7 +78,10 @@
     <script src="dist/jquery.filterjitsu.js"></script>
     <script type="text/javascript">
       $(document).ready(function() {
-        $('tbody tr').filterjitsu();
+        $('tbody tr').filterjitsu({
+          ITEM_TYPE: 'Video',
+          ITEM_STRING: 'video'
+        });
       });
     </script>
   </body>

@@ -33,7 +33,17 @@ Navigate to [http://localhost:3000](http://localhost:3000)
      * Array of video classifications
      * @type {Array}
      */
-    CATEGORIES: ['official', 'international', 'unofficial']
+    CATEGORIES: ['official', 'international', 'unofficial'],
+    /**
+     * Descriptive word for what things are being filtered
+     * @type {String}
+     */
+    ITEM_STRING: 'item',
+    /**
+     * URL param for type being filtered
+     * @type {String}
+     */
+    ITEM_TYPE: 'Item'
   };
 ```
 
