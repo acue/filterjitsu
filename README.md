@@ -25,11 +25,6 @@ Navigate to [http://localhost:3000](http://localhost:3000)
      */
     INFO_SELECTOR: '.info',
     /**
-     * jQuery selector for breadcrumb
-     * @type {String}
-     */
-    BREADCRUMB_SELECTOR: '.breadcrumb',
-    /**
      * Array of video classifications
      * @type {Array}
      */

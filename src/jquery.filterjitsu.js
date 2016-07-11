@@ -121,8 +121,6 @@
 
       if ($(settings.INFO_SELECTOR).length > 0) {
         $(settings.INFO_SELECTOR).html(html);
-      } else {
-        $(settings.BREADCRUMB_SELECTOR).after(html);
       }
     }
   }
@@ -164,11 +162,6 @@
      * @type {String}
      */
     INFO_SELECTOR: '.info',
-    /**
-     * jQuery selector for breadcrumb
-     * @type {String}
-     */
-    BREADCRUMB_SELECTOR: '.breadcrumb',
     /**
      * Array of item classifications
      * @type {Array}
