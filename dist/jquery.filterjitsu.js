@@ -108,7 +108,7 @@
    * @param  {Object} params   - search query parameters from `parameters()`
    * @param  {Object} settings - plugin settings
    */
-  function replaceOrAppendAlert (params, $thisObj, settings) {
+  function replaceOrAppendAlert (params, settings) {
     var i,
         html,
         param,
@@ -148,7 +148,7 @@
 
       hideUnmatchedRows($this, queryString);
       updateCount(queryString, settings);
-      replaceOrAppendAlert(params, $this, settings);
+      replaceOrAppendAlert(params, settings);
     }
 
     init();
@@ -170,11 +170,6 @@
      * @type {String}
      */
     INFO_SELECTOR: '.info',
-    /**
-     * Array of item classifications
-     * @type {Array}
-     */
-    CATEGORIES: ['official', 'international', 'unofficial'],
     /**
      * Descriptive word for what things are being filtered
      * @type {String}

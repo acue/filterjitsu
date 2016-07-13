@@ -25,11 +25,6 @@ Navigate to [http://localhost:3000](http://localhost:3000)
      */
     INFO_SELECTOR: '.info',
     /**
-     * Array of video classifications
-     * @type {Array}
-     */
-    CATEGORIES: ['official', 'international', 'unofficial'],
-    /**
      * Descriptive word for what things are being filtered
      * @type {String}
      */
