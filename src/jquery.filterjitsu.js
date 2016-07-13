@@ -90,14 +90,15 @@
 
   /**
    * Build bootstrap style alert with category type string
-   * @param  {String} categoryType
+   * @param  {String} categoryTypesStr
    * @param  {String} pathname
    * @return {String} valid bootrap html for an alert
    */
-  function buildHtmlAlert(categoryType, pathname, settings) {
+  function buildHtmlAlert(categoryTypesStr, pathname, settings) {
     return (
       '<div id="info" class="alert alert-info text-center col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">' +
-      '  You are viewing only ' + categoryType + '. <a href="' + pathname + '">View all ' + settings.ITEM_STRING + 's.</a>' +
+      '  You are viewing only ' + categoryTypesStr + ' ' + settings.ITEM_STRING + 's.' +
+      '  <a href="' + pathname + '">View all ' + settings.ITEM_STRING + 's.</a>' +
       '</div>'
     );
   }
@@ -108,20 +109,27 @@
    * @param  {Object} settings - plugin settings
    */
   function replaceOrAppendAlert (params, settings) {
-    var html,
-        categoryType = [];
+    var i,
+        html,
+        param,
+        paramsKey,
+        paramsKeys = Object.keys(params),
+        categoryTypes = [];
 
-    if (typeof params.type !== 'undefined' && params.type !== settings.ITEM_TYPE) {
-      if (typeof params.category !== 'undefined') {
-        categoryType.push(settings.CATEGORIES[params.category]);
+    // build array of category types based on the params
+    for (i = 0; i < paramsKeys.length; i++) {
+      paramsKey = paramsKeys[i];
+      param = params[paramsKey];
+      if (param !== undefined && param !== settings.ITEM_TYPE) {
+        categoryTypes.push(param);
       }
+    }
 
-      categoryType.push(params.type.replace(settings.ITEM_TYPE, ' ' + settings.ITEM_STRING + 's'));
-      html = buildHtmlAlert(categoryType.join(' '), window.location.pathname, settings);
-
-      if ($(settings.INFO_SELECTOR).length > 0) {
-        $(settings.INFO_SELECTOR).html(html);
-      }
+    // only display the html alert if there are categories in the categoryTypes array
+    // only replace the html if the info element exists in the dom
+    if (categoryTypes.length > 0 && $(settings.INFO_SELECTOR).length > 0) {
+      html = buildHtmlAlert(categoryTypes.join(', '), window.location.pathname, settings);
+      $(settings.INFO_SELECTOR).html(html);
     }
   }
 
@@ -162,11 +170,6 @@
      * @type {String}
      */
     INFO_SELECTOR: '.info',
-    /**
-     * Array of item classifications
-     * @type {Array}
-     */
-    CATEGORIES: ['official', 'international', 'unofficial'],
     /**
      * Descriptive word for what things are being filtered
      * @type {String}
