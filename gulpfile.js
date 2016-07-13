@@ -2,7 +2,8 @@ var del = require('del'),
     gulp = require('gulp'),
     jshint = require('gulp-jshint'),
     rename = require('gulp-rename'),
-    uglify = require('gulp-uglify');
+    uglify = require('gulp-uglify'),
+    notify = require('gulp-notify');
 
 var paths = {
   FILENAME: 'jquery.filterjitsu.js',
@@ -23,7 +24,16 @@ gulp.task('clean-prod', function () {
 gulp.task('lint', function () {
   return gulp.src(paths.SRC + paths.FILENAME)
     .pipe(jshint())
-    .pipe(jshint.reporter('default'));
+    .pipe(jshint.reporter('default'))
+    // https://github.com/mikaelbr/gulp-notify#as-jshint-reporter
+    .pipe(notify(function (file) {
+      if (file.jshint.success) {
+        // Don't show something if success
+        return false;
+      }
+
+      return file.relative + " (" + file.jshint.results.length + " errors)";
+    }));
 });
 
 gulp.task('build-dev', ['lint', 'clean-dev'], function () {
@@ -34,6 +44,8 @@ gulp.task('build-dev', ['lint', 'clean-dev'], function () {
 gulp.task('build-prod', ['lint', 'clean-prod'], function () {
   gulp.src(paths.SRC + paths.FILENAME)
     .pipe(uglify())
+    // https://gist.github.com/nodesocket/c33362a8a2efabdbdf36
+    .on('error', notify.onError('Error: uglification failed'))
     .pipe(rename({suffix: paths.MIN}))
     .pipe(gulp.dest(paths.DIST));
 });
