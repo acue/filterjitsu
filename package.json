@@ -28,5 +28,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^1.5.4",
     "jshint": "^2.9.2"
-  }
+  },
+  "dependencies": {},
+  "license": "MIT"
 }
