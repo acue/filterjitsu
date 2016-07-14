@@ -1,5 +1,7 @@
 # jquery.filterjitsu.js
 
+[View contributors](https://github.com/Fullscreen/filterjitsu/graphs/contributors)
+
 ## Demo
 ```shell
  $ python -m SimpleHTTPServer 3000
