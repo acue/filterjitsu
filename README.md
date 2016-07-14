@@ -10,9 +10,16 @@ Navigate to [http://localhost:3000](http://localhost:3000)
 The filterjitsu plugin is initialized by being chained onto a list of jQuery objects. The plugin
 accepts an options object which will override the defaults defined within the plugin.
 
-Filterjitsu assumes a few things about the HTML structure on the page which it is initialized. The
-`DATA_FILTERABLE` selector is required on each item that can be filtered, and for that reason it is
-the best jQuery selector to initialize the plugin with (but this is up to you).
+Filterjitsu assumes a few things about the HTML and the URL structure on the page which it is
+initialized. The `DATA_FILTERABLE` selector is required on each item that can be filtered, and for
+that reason it is the best jQuery selector to initialize the plugin with (but this is up to you).
+The filterable items are filtered based on key value pairs provided in the search query parameters of
+the url that match data attributes on the filterable elements. For example, a URL with the search
+query `?type=video&genre=comedy` would filter all elements that did not have the `data-type="video"`
+or `data-genre="comedy"` data attributes. It is important to note that the url parameters form a
+boolean OR when filtering out filterable elements.
+
+Below is an example of how filterjitsu could be structured in HTML and initialized in javascript.
 ```html
   <!-- links to change url and cause filtering -->
   <a href="/">Clear filters</a>
@@ -50,7 +57,7 @@ the best jQuery selector to initialize the plugin with (but this is up to you).
      * jQuery selector for field to show count
      * @type {String}
      */
-    DATA_COUNT: '[data-count]'
+    DATA_COUNT: '[data-count]',
     /**
      * jQuery selector for info
      * @type {String}
