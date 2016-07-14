@@ -19,6 +19,12 @@ query `?type=video&genre=comedy` would filter all elements that did not have the
 or `data-genre="comedy"` data attributes. It is important to note that the url parameters form a
 boolean OR when filtering out filterable elements.
 
+The `data-count` attribute can be applied to any elment and will be updated with the current number
+of elements displayed on the page after the main list of filterable elements ahve been filtered.
+
+The class `.info` may be applied to an element and it will be populated with an alert with a
+description about the visible elements based on how they were filterd.
+
 Below is an example of how filterjitsu could be structured in HTML and initialized in javascript.
 ```html
   <!-- links to change url and cause filtering -->
