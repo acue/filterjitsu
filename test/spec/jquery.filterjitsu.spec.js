@@ -16,7 +16,7 @@ describe('test test', function () {
   });
 
   it('should filter down to 3 items', function () {
-    expect($('[data-count]').text()).toBe('3 items');
+    expect($('[data-count]')).toHaveText('3 items');
   });
 
   it('should show water items', function () {
