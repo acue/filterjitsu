@@ -82,7 +82,7 @@
    * @return {Array} array of jQuery objects that match the `[data-count]`` selector
    */
   function updateCount (queryString, settings) {
-    var count = $(settings.DATA_FILTERABLE).length - $(queryString).length,
+    var count = $(settings.DATA_FILTERABLE + ':visible').length,
         itemText = (count === 1) ? settings.ITEM_STRING : settings.ITEM_STRING + 's';
 
     return $(settings.DATA_COUNT).text(count + ' ' + itemText);
