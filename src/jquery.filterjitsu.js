@@ -77,11 +77,10 @@
 
   /**
    * Update the count of visible rows
-   * @param  {Object} queryString - jQuery selector
    * @param  {Object} settings    - plugin settings
    * @return {Array} array of jQuery objects that match the `[data-count]`` selector
    */
-  function updateCount (queryString, settings) {
+  function updateCount (settings) {
     var count = $(settings.DATA_FILTERABLE + ':visible').length,
         itemText = (count === 1) ? settings.ITEM_STRING : settings.ITEM_STRING + 's';
 
@@ -146,7 +145,7 @@
           queryString = buildQueryString(params, settings);
 
       hideUnmatchedRows(queryString, settings);
-      updateCount(queryString, settings);
+      updateCount(settings);
       replaceOrAppendAlert(params, settings);
     }
 
