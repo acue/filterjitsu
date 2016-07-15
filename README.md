@@ -24,8 +24,8 @@ boolean OR when filtering out filterable elements.
 The `data-count` attribute can be applied to any elment and will be updated with the current number
 of elements displayed on the page after the main list of filterable elements ahve been filtered.
 
-The class `.info` may be applied to an element and it will be populated with an alert with a
-description about the visible elements based on how they were filterd.
+The `data-alert` attribute can be applied to an element and it will be populated with an alert with
+a description about the visible elements based on how they were filterd.
 
 Below is an example of how filterjitsu could be structured in HTML and initialized in javascript.
 ```html
@@ -35,7 +35,7 @@ Below is an example of how filterjitsu could be structured in HTML and initializ
   <a href="?type=LandItem">Land Items</a>
   <a href="?type=Item">All</a>
   <!-- items to be filtered -->
-  <div class="info"></div>
+  <div data-alert></div>
   <div data-count></div>
   <div>
     <div data-filterable data-type="WaterItem">Surfboard</div>
@@ -70,7 +70,7 @@ Below is an example of how filterjitsu could be structured in HTML and initializ
      * jQuery selector for info
      * @type {String}
      */
-    INFO_SELECTOR: '.info',
+    DATA_ALERT: '[data-alert]',
     /**
      * Descriptive word for what things are being filtered
      * @type {String}

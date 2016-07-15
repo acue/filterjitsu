@@ -127,9 +127,9 @@
 
     // only display the html alert if there are categories in the categoryTypes array
     // only replace the html if the info element exists in the dom
-    if (categoryTypes.length > 0 && $(settings.INFO_SELECTOR).length > 0) {
+    if (categoryTypes.length > 0 && $(settings.DATA_ALERT).length > 0) {
       html = buildHtmlAlert(categoryTypes.join(', '), window.location.pathname, settings);
-      $(settings.INFO_SELECTOR).html(html);
+      $(settings.DATA_ALERT).html(html);
     }
   }
 
@@ -168,7 +168,7 @@
      * jQuery selector for info
      * @type {String}
      */
-    INFO_SELECTOR: '.info',
+    DATA_ALERT: '[data-alert]',
     /**
      * Descriptive word for what things are being filtered
      * @type {String}
