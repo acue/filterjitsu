@@ -63,8 +63,8 @@
 
   /**
    * Hide rows that do not match the desired data field
-   * @param  {Object} $filterjitsuEl - main jQuery object this plugin is called on
-   * @param  {Object} queryString    - jQuery selector
+   * @param  {Object} queryString - jQuery selector
+   * @param  {Object} settings    - plugin setting
    * @return {Array} array of jQuery objects of elements hidden
    */
   function hideUnmatchedRows (queryString, settings) {
@@ -77,7 +77,7 @@
 
   /**
    * Update the count of visible rows
-   * @param  {Object} settings    - plugin settings
+   * @param  {Object} settings - plugin settings
    * @return {Array} array of jQuery objects that match the `[data-count]`` selector
    */
   function updateCount (settings) {
@@ -90,8 +90,9 @@
 
   /**
    * Build bootstrap style alert with category type string
-   * @param  {String} categoryTypesStr
-   * @param  {String} pathname
+   * @param  {String} categoryTypesStr - comma separated list of search query string keys
+   * @param  {String} pathname         - url path to clear search query string
+   * @param  {Object} settings         - plugin setting
    * @return {String} valid bootrap html for an alert
    */
   function buildHtmlAlert(categoryTypesStr, pathname, settings) {
