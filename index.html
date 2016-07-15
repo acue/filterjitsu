@@ -27,14 +27,14 @@
           <li><a href="?type=FacebookVideo">Total Facebook Videos</a></li>
           <li><a href="?status=released">Total Released Videos</a></li>
           <li><a href="?status=unreleased">Total Unreleased Videos</a></li>
-          <li><a href="?type=Video">Total Videos</a></li>
+          <li><a href="?">Total Videos</a></li>
         </ul>
       </div>
       <div class="row">
         <div>
-          <span>Count</span> <span data-count></span>
+          <span>Count</span> <span data-count="video"></span>
         </div>
-        <div data-alert></div>
+        <div data-alert="video"></div>
       </div>
       <div class="row">
         <table class="table">
@@ -82,10 +82,7 @@
     <script src="dist/jquery.filterjitsu.js"></script>
     <script type="text/javascript">
       $(document).ready(function() {
-        $.fn.filterjitsu({
-          ITEM_TYPE: 'Video',
-          ITEM_STRING: 'video'
-        });
+        $.fn.filterjitsu();
       });
     </script>
   </body>

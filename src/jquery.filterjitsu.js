@@ -51,7 +51,7 @@
         key;
 
     for (key in params) {
-      if (params.hasOwnProperty(key) && params[key] !== settings.ITEM_TYPE) {
+      if (params.hasOwnProperty(key) && params[key]) {
         selectorsArr.push(settings.DATA_FILTERABLE + '[data-' + key + '][data-' + key + '!=' + params[key] + ']');
       }
     }
@@ -82,7 +82,8 @@
    */
   function updateCount (settings) {
     var count = $(settings.DATA_FILTERABLE + ':visible').length,
-        itemText = (count === 1) ? settings.ITEM_STRING : settings.ITEM_STRING + 's';
+        countString = $('[data-count]').data('count'),
+        itemText = (count === 1) ? countString : countString + 's';
 
     return $(settings.DATA_COUNT).text(count + ' ' + itemText);
   }
@@ -94,10 +95,12 @@
    * @return {String} valid bootrap html for an alert
    */
   function buildHtmlAlert(categoryTypesStr, pathname, settings) {
+    var alertString = $('[data-alert]').data('alert');
+
     return (
       '<div id="info" class="alert alert-info text-center col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">' +
-      '  You are viewing only ' + categoryTypesStr + ' ' + settings.ITEM_STRING + 's.' +
-      '  <a href="' + pathname + '">View all ' + settings.ITEM_STRING + 's.</a>' +
+      '  You are viewing only ' + categoryTypesStr + ' ' + alertString + 's.' +
+      '  <a href="' + pathname + '">View all ' + alertString + 's.</a>' +
       '</div>'
     );
   }
@@ -119,7 +122,7 @@
     for (i = 0; i < paramsKeys.length; i++) {
       paramsKey = paramsKeys[i];
       param = params[paramsKey];
-      if (param !== undefined && param !== settings.ITEM_TYPE) {
+      if (param !== undefined) {
         categoryTypes.push(param);
       }
     }
@@ -167,17 +170,7 @@
      * jQuery selector for info
      * @type {String}
      */
-    DATA_ALERT: '[data-alert]',
-    /**
-     * Descriptive word for what things are being filtered
-     * @type {String}
-     */
-    ITEM_STRING: 'item',
-    /**
-     * URL param for type being filtered
-     * @type {String}
-     */
-    ITEM_TYPE: 'Item'
+    DATA_ALERT: '[data-alert]'
   };
 
   $.fn.filterjitsu = Filterjitsu;

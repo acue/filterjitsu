@@ -33,7 +33,7 @@ Below is an example of how filterjitsu could be structured in HTML and initializ
   <a href="/">Clear filters</a>
   <a href="?type=WaterItem">Water Items</a>
   <a href="?type=LandItem">Land Items</a>
-  <a href="?type=Item">All</a>
+  <a href="?">All</a>
   <!-- items to be filtered -->
   <div data-alert></div>
   <div data-count></div>
@@ -70,17 +70,7 @@ Below is an example of how filterjitsu could be structured in HTML and initializ
      * jQuery selector for info
      * @type {String}
      */
-    DATA_ALERT: '[data-alert]',
-    /**
-     * Descriptive word for what things are being filtered
-     * @type {String}
-     */
-    ITEM_STRING: 'item',
-    /**
-     * URL param for type being filtered
-     * @type {String}
-     */
-    ITEM_TYPE: 'Item'
+    DATA_ALERT: '[data-alert]'
   };
 ```
 
