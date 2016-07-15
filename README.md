@@ -95,3 +95,8 @@ install the devDependencies.
  $ python -m SimpleHTTPServer 3000
  ... test in [browser](http://localhost:3000)
 ```
+
+## Testing with Karma + Jasmine
+```shell
+ $ gulp test
+```

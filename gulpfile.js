@@ -3,7 +3,8 @@ var del = require('del'),
     jshint = require('gulp-jshint'),
     rename = require('gulp-rename'),
     uglify = require('gulp-uglify'),
-    notify = require('gulp-notify');
+    notify = require('gulp-notify'),
+    Server = require('karma').Server;
 
 var paths = {
   FILENAME: 'jquery.filterjitsu.js',
@@ -55,3 +56,10 @@ gulp.task('watch', function () {
 });
 
 gulp.task('default', ['build-dev', 'build-prod', 'watch']);
+
+gulp.task('test', function (done) {
+  new Server({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, done).start();
+});
