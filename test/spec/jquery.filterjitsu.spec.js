@@ -12,7 +12,7 @@ describe('test test', function () {
     // http://stackoverflow.com/questions/2494213/changing-window-location-without-triggering-refresh
     window.history.replaceState( {}, '', 'http://localhost:8080/context.html?type=Water');
 
-    $fj = $('[data-filterable]').filterjitsu();
+    $fj = $.fn.filterjitsu();
   });
 
   it('should filter down to 3 items', function () {

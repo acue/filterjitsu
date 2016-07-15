@@ -47,7 +47,7 @@ Below is an example of how filterjitsu could be structured in HTML and initializ
   </div>
   <!-- filterjitsu plugin -->
   <script>
-    $('[data-filterable]').filterjitsu({
+    $.fn.filterjitsu({
       // plugin options here
     });
   </script>

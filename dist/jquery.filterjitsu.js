@@ -67,10 +67,10 @@
    * @param  {Object} queryString    - jQuery selector
    * @return {Array} array of jQuery objects of elements hidden
    */
-  function hideUnmatchedRows ($filterjitsuEl, queryString) {
+  function hideUnmatchedRows (queryString, settings) {
     // filter the elements that match the `'[data-filterable][data-' + key + '!=' + params[key] + ']'`
     // selector and hide the resulting elements
-    return $filterjitsuEl
+    return $(settings.DATA_FILTERABLE)
       .filter(queryString)
       .hide();
   }
@@ -82,7 +82,7 @@
    * @return {Array} array of jQuery objects that match the `[data-count]`` selector
    */
   function updateCount (queryString, settings) {
-    var count = $(settings.DATA_FILTERABLE).length - $(queryString).length,
+    var count = $(settings.DATA_FILTERABLE + ':visible').length,
         itemText = (count === 1) ? settings.ITEM_STRING : settings.ITEM_STRING + 's';
 
     return $(settings.DATA_COUNT).text(count + ' ' + itemText);
@@ -139,14 +139,13 @@
    */
   Filterjitsu = function (options) {
     var defaults = $.fn.filterjitsu.defaults,
-        settings = $.extend({}, defaults, options),
-        $this = this;
+        settings = $.extend({}, defaults, options);
 
     function init() {
       var params = parameters(),
           queryString = buildQueryString(params, settings);
 
-      hideUnmatchedRows($this, queryString);
+      hideUnmatchedRows(queryString, settings);
       updateCount(queryString, settings);
       replaceOrAppendAlert(params, settings);
     }
