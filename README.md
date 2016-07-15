@@ -9,7 +9,7 @@
 Navigate to [http://localhost:3000](http://localhost:3000)
 
 ## How to use
-The filterjitsu plugin is initialized by being chained onto a list of jQuery objects. The plugin
+The filterjitsu plugin is initialized by being called off of jQuery.fn (or $.fn). The plugin
 accepts an options object which will override the defaults defined within the plugin.
 
 Filterjitsu assumes a few things about the HTML and the URL structure on the page which it is
@@ -23,27 +23,30 @@ boolean OR when filtering out filterable elements.
 
 The `data-count` attribute can be applied to any elment and will be updated with the current number
 of elements displayed on the page after the main list of filterable elements ahve been filtered.
+A value can be assigned to `data-count` to give context for the count number. For instance
+`data-count="item"` will render `X items` in the html text after filterjitsu runs.
 
 The `data-alert` attribute can be applied to an element and it will be populated with an alert with
-a description about the visible elements based on how they were filterd.
+a description about the visible elements based on how they were filtered. A value can be assigned to
+`data-alert` to give context for the alert text.
 
 Below is an example of how filterjitsu could be structured in HTML and initialized in javascript.
 ```html
   <!-- links to change url and cause filtering -->
   <a href="/">Clear filters</a>
-  <a href="?type=WaterItem">Water Items</a>
-  <a href="?type=LandItem">Land Items</a>
+  <a href="?type=Water">Water Items</a>
+  <a href="?type=Land">Land Items</a>
   <a href="?">All</a>
   <!-- items to be filtered -->
-  <div data-alert></div>
-  <div data-count></div>
+  <div data-alert="item"></div>
+  <div data-count="item"></div>
   <div>
-    <div data-filterable data-type="WaterItem">Surfboard</div>
-    <div data-filterable data-type="LandItem">Skateboard</div>
-    <div data-filterable data-type="WaterItem">Skimboard</div>
-    <div data-filterable data-type="WaterItem">Paddleboard</div>
-    <div data-filterable data-type="LandItem">Rollerblades</div>
-    <div data-filterable data-type="LandItem">BMX Bike</div>
+    <div data-filterable data-type="Water">Surfboard</div>
+    <div data-filterable data-type="Land">Skateboard</div>
+    <div data-filterable data-type="Water">Skimboard</div>
+    <div data-filterable data-type="Water">Paddleboard</div>
+    <div data-filterable data-type="Land">Rollerblades</div>
+    <div data-filterable data-type="Land">BMX Bike</div>
   </div>
   <!-- filterjitsu plugin -->
   <script>
