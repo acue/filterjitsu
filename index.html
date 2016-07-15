@@ -15,26 +15,26 @@
       <div class="row">
         <ul>
           <li><a href="/">Clear search query params</a></li>
-          <li><a href="?category=official&type=YouTubeVideo">Official YouTube Videos</a></li>
-          <li><a href="?category=official&type=FacebookVideo">Official Facebook Videos</a></li>
-          <li><a href="?category=international&type=YouTubeVideo">International YouTube Videos</a></li>
-          <li><a href="?category=international&type=FacebookVideo">International Facebook Videos</a></li>
-          <li><a href="?category=unofficial&type=YouTubeVideo">Unofficial YouTube Videos</a></li>
-          <li><a href="?category=unofficial&type=FacebookVideo">Unofficial Facebook Videos</a></li>
-          <li><a href="?category=unofficial&type=YouTubeVideo&status=released">Unofficial Released YouTube Videos</a></li>
-          <li><a href="?category=unofficial&type=FacebookVideo&status=unreleased">Unofficial Unreleased Facebook Videos</a></li>
-          <li><a href="?type=YouTubeVideo">Total YouTube Videos</a></li>
-          <li><a href="?type=FacebookVideo">Total Facebook Videos</a></li>
+          <li><a href="?category=official&type=YouTube">Official YouTube Videos</a></li>
+          <li><a href="?category=official&type=Facebook">Official Facebook Videos</a></li>
+          <li><a href="?category=international&type=YouTube">International YouTube Videos</a></li>
+          <li><a href="?category=international&type=Facebook">International Facebook Videos</a></li>
+          <li><a href="?category=unofficial&type=YouTube">Unofficial YouTube Videos</a></li>
+          <li><a href="?category=unofficial&type=Facebook">Unofficial Facebook Videos</a></li>
+          <li><a href="?category=unofficial&type=YouTube&status=released">Unofficial Released YouTube Videos</a></li>
+          <li><a href="?category=unofficial&type=Facebook&status=unreleased">Unofficial Unreleased Facebook Videos</a></li>
+          <li><a href="?type=YouTube">Total YouTube Videos</a></li>
+          <li><a href="?type=Facebook">Total Facebook Videos</a></li>
           <li><a href="?status=released">Total Released Videos</a></li>
           <li><a href="?status=unreleased">Total Unreleased Videos</a></li>
-          <li><a href="?type=Video">Total Videos</a></li>
+          <li><a href="?">Total Videos</a></li>
         </ul>
       </div>
       <div class="row">
         <div>
-          <span>Count</span> <span data-count></span>
+          <span>Count</span> <span data-count="video"></span>
         </div>
-        <div class="info"></div>
+        <div data-alert="video"></div>
       </div>
       <div class="row">
         <table class="table">
@@ -44,35 +44,35 @@
             </tr>
           </thead>
           <tbody>
-            <tr data-filterable data-type="YouTubeVideo">
-              <td>Official YouTube Videos</td><td>undefined</td><td>YouTubeVideo</td><td>undefined</td>
+            <tr data-filterable data-type="YouTube">
+              <td>Official YouTube Videos</td><td>undefined</td><td>YouTube</td><td>undefined</td>
             </tr>
-            <tr data-filterable data-category="official" data-type="YouTubeVideo">
-              <td>Official YouTube Videos</td><td>Official</td><td>YouTubeVideo</td><td>undefined</td>
+            <tr data-filterable data-category="official" data-type="YouTube">
+              <td>Official YouTube Videos</td><td>Official</td><td>YouTube</td><td>undefined</td>
             </tr>
-            <tr data-filterable data-category="international" data-type="FacebookVideo">
-              <td>International Facebook Videos</td><td>International</td><td>FacebookVideo</td><td>undefined</td>
+            <tr data-filterable data-category="international" data-type="Facebook">
+              <td>International Facebook Videos</td><td>International</td><td>Facebook</td><td>undefined</td>
             </tr>
-            <tr data-filterable data-category="unofficial" data-type="YouTubeVideo" data-status="released">
-              <td>Unofficial YouTube Videos</td><td>Unofficial</td><td>YouTubeVideo</td><td>Released</td>
+            <tr data-filterable data-category="unofficial" data-type="YouTube" data-status="released">
+              <td>Unofficial YouTube Videos</td><td>Unofficial</td><td>YouTube</td><td>Released</td>
             </tr>
-            <tr data-filterable data-category="official" data-type="YouTubeVideo" data-status="released">
-              <td>Official YouTube Videos</td><td>Official</td><td>YouTubeVideo</td><td>Released</td>
+            <tr data-filterable data-category="official" data-type="YouTube" data-status="released">
+              <td>Official YouTube Videos</td><td>Official</td><td>YouTube</td><td>Released</td>
             </tr>
-            <tr data-filterable data-category="unofficial" data-type="FacebookVideo" data-status="unreleased">
-              <td>Unofficial Facebook Videos</td><td>Unofficial</td><td>FacebookVideo</td><td>Unreleased</td>
+            <tr data-filterable data-category="unofficial" data-type="Facebook" data-status="unreleased">
+              <td>Unofficial Facebook Videos</td><td>Unofficial</td><td>Facebook</td><td>Unreleased</td>
             </tr>
-            <tr data-filterable data-category="international" data-type="YouTubeVideo" data-status="released">
-              <td>International YouTube Videos</td><td>International</td><td>YouTubeVideo</td><td>Released</td>
+            <tr data-filterable data-category="international" data-type="YouTube" data-status="released">
+              <td>International YouTube Videos</td><td>International</td><td>YouTube</td><td>Released</td>
             </tr>
-            <tr data-filterable data-category="official" data-type="YouTubeVideo" data-status="unreleased">
-              <td>Official YouTube Videos</td><td>Official</td><td>YouTubeVideo</td><td>Unreleased</td>
+            <tr data-filterable data-category="official" data-type="YouTube" data-status="unreleased">
+              <td>Official YouTube Videos</td><td>Official</td><td>YouTube</td><td>Unreleased</td>
             </tr>
-            <tr data-filterable data-category="official" data-type="FacebookVideo" data-status="unreleased">
-              <td>Official Facebook Videos</td><td>Official</td><td>FacebookVideo</td><td>Unreleased</td>
+            <tr data-filterable data-category="official" data-type="Facebook" data-status="unreleased">
+              <td>Official Facebook Videos</td><td>Official</td><td>Facebook</td><td>Unreleased</td>
             </tr>
-            <tr data-filterable data-category="unofficial" data-type="FacebookVideo" data-status="released">
-              <td>Unofficial Facebook Videos</td><td>Unofficial</td><td>FacebookVideo</td><td>Released</td>
+            <tr data-filterable data-category="unofficial" data-type="Facebook" data-status="released">
+              <td>Unofficial Facebook Videos</td><td>Unofficial</td><td>Facebook</td><td>Released</td>
             </tr>
           </tbody>
         </table>
@@ -82,10 +82,7 @@
     <script src="dist/jquery.filterjitsu.js"></script>
     <script type="text/javascript">
       $(document).ready(function() {
-        $('[data-filterable]').filterjitsu({
-          ITEM_TYPE: 'Video',
-          ITEM_STRING: 'video'
-        });
+        $.fn.filterjitsu();
       });
     </script>
   </body>

@@ -51,7 +51,7 @@
         key;
 
     for (key in params) {
-      if (params.hasOwnProperty(key) && params[key] !== settings.ITEM_TYPE) {
+      if (params.hasOwnProperty(key) && params[key]) {
         selectorsArr.push(settings.DATA_FILTERABLE + '[data-' + key + '][data-' + key + '!=' + params[key] + ']');
       }
     }
@@ -63,42 +63,45 @@
 
   /**
    * Hide rows that do not match the desired data field
-   * @param  {Object} $filterjitsuEl - main jQuery object this plugin is called on
-   * @param  {Object} queryString    - jQuery selector
+   * @param  {Object} queryString - jQuery selector
+   * @param  {Object} settings    - plugin setting
    * @return {Array} array of jQuery objects of elements hidden
    */
-  function hideUnmatchedRows ($filterjitsuEl, queryString) {
+  function hideUnmatchedRows (queryString, settings) {
     // filter the elements that match the `'[data-filterable][data-' + key + '!=' + params[key] + ']'`
     // selector and hide the resulting elements
-    return $filterjitsuEl
+    return $(settings.DATA_FILTERABLE)
       .filter(queryString)
       .hide();
   }
 
   /**
    * Update the count of visible rows
-   * @param  {Object} queryString - jQuery selector
-   * @param  {Object} settings    - plugin settings
+   * @param  {Object} settings - plugin settings
    * @return {Array} array of jQuery objects that match the `[data-count]`` selector
    */
-  function updateCount (queryString, settings) {
-    var count = $(settings.DATA_FILTERABLE).length - $(queryString).length,
-        itemText = (count === 1) ? settings.ITEM_STRING : settings.ITEM_STRING + 's';
+  function updateCount (settings) {
+    var count = $(settings.DATA_FILTERABLE + ':visible').length,
+        countString = $('[data-count]').data('count'),
+        itemText = (count === 1) ? countString : countString + 's';
 
     return $(settings.DATA_COUNT).text(count + ' ' + itemText);
   }
 
   /**
    * Build bootstrap style alert with category type string
-   * @param  {String} categoryTypesStr
-   * @param  {String} pathname
+   * @param  {String} categoryTypesStr - comma separated list of search query string keys
+   * @param  {String} pathname         - url path to clear search query string
+   * @param  {Object} settings         - plugin setting
    * @return {String} valid bootrap html for an alert
    */
   function buildHtmlAlert(categoryTypesStr, pathname, settings) {
+    var alertString = $('[data-alert]').data('alert');
+
     return (
       '<div id="info" class="alert alert-info text-center col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">' +
-      '  You are viewing only ' + categoryTypesStr + ' ' + settings.ITEM_STRING + 's.' +
-      '  <a href="' + pathname + '">View all ' + settings.ITEM_STRING + 's.</a>' +
+      '  You are viewing only ' + categoryTypesStr + ' ' + alertString + 's.' +
+      '  <a href="' + pathname + '">View all ' + alertString + 's.</a>' +
       '</div>'
     );
   }
@@ -120,16 +123,16 @@
     for (i = 0; i < paramsKeys.length; i++) {
       paramsKey = paramsKeys[i];
       param = params[paramsKey];
-      if (param !== undefined && param !== settings.ITEM_TYPE) {
+      if (param !== undefined) {
         categoryTypes.push(param);
       }
     }
 
     // only display the html alert if there are categories in the categoryTypes array
     // only replace the html if the info element exists in the dom
-    if (categoryTypes.length > 0 && $(settings.INFO_SELECTOR).length > 0) {
+    if (categoryTypes.length > 0 && $(settings.DATA_ALERT).length > 0) {
       html = buildHtmlAlert(categoryTypes.join(', '), window.location.pathname, settings);
-      $(settings.INFO_SELECTOR).html(html);
+      $(settings.DATA_ALERT).html(html);
     }
   }
 
@@ -139,15 +142,14 @@
    */
   Filterjitsu = function (options) {
     var defaults = $.fn.filterjitsu.defaults,
-        settings = $.extend({}, defaults, options),
-        $this = this;
+        settings = $.extend({}, defaults, options);
 
     function init() {
       var params = parameters(),
           queryString = buildQueryString(params, settings);
 
-      hideUnmatchedRows($this, queryString);
-      updateCount(queryString, settings);
+      hideUnmatchedRows(queryString, settings);
+      updateCount(settings);
       replaceOrAppendAlert(params, settings);
     }
 
@@ -169,17 +171,7 @@
      * jQuery selector for info
      * @type {String}
      */
-    INFO_SELECTOR: '.info',
-    /**
-     * Descriptive word for what things are being filtered
-     * @type {String}
-     */
-    ITEM_STRING: 'item',
-    /**
-     * URL param for type being filtered
-     * @type {String}
-     */
-    ITEM_TYPE: 'Item'
+    DATA_ALERT: '[data-alert]'
   };
 
   $.fn.filterjitsu = Filterjitsu;

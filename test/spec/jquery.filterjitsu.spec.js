@@ -12,7 +12,7 @@ describe('test test', function () {
     // http://stackoverflow.com/questions/2494213/changing-window-location-without-triggering-refresh
     window.history.replaceState( {}, '', 'http://localhost:8080/context.html?type=Water');
 
-    $fj = $('[data-filterable]').filterjitsu();
+    $fj = $.fn.filterjitsu();
   });
 
   it('should filter down to 3 items', function () {
@@ -25,5 +25,18 @@ describe('test test', function () {
 
   it('should hide land items', function () {
     expect($('[data-filterable][data-type!="Water"]')).toBeHidden();
+  });
+
+  it('should show an alert', function () {
+    expect($('[data-alert]')).toBeVisible();
+  });
+
+  it('should show an alert with detailed text', function () {
+    expect($('[data-alert]')).toContainHtml(
+      '<div id="info" class="alert alert-info text-center col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">' +
+      '  You are viewing only Water items.' +
+      '  <a href="/context.html">View all items.</a>' +
+      '</div>'
+    );
   });
 });
