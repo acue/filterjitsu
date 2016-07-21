@@ -82,7 +82,7 @@ The development file lives under `src/jquery.filterjitsu.js`. To develop, first 
 install the devDependencies.
 ```shell
  $ npm install
- $ gulp
+ $ ./node_modules/.bin/gulp
  ... edit jquery.filterjitsu.js
  ... look in terminal for gulp output as you save
  $ python -m SimpleHTTPServer 3000
@@ -100,7 +100,7 @@ messages. Each `it()` block should have a clear title and describe exactly what 
 
 Execute the tests using gulp.
 ```shell
- $ gulp test
+ $ ./node_modules/.bin/gulp test
 ```
 
 ## Versioning
