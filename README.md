@@ -89,7 +89,21 @@ install the devDependencies.
  ... test in [browser](http://localhost:3000)
 ```
 
-## Testing with Karma + Jasmine
+## Testing with Karma + Jasmine-jQuery
+The test files live under the `test` directory. Karma is used as the test runner and
+[jasmine](http://jasmine.github.io/) + [jasmine-jquery](https://github.com/velesin/jasmine-jquery)
+is the bdd framework.
+
+Each test should have its own spec file and a matching fixtures html template. Tests should be
+concise. Limit the number of `expect()`s per `it()` block, this allows for clear test failure
+messages. Each `it()` block should have a clear title and describe exactly what is expected.
+
+Execute the tests using gulp.
 ```shell
  $ gulp test
 ```
+
+## Versioning
+Versions will follow the [semvar](http://semver.org/) format. All versions will be visible under
+[releases](https://github.com/Fullscreen/filterjitsu/releases) with an
+[updated changelog](https://github.com/Fullscreen/filterjitsu/blob/master/CHANGELOG.md).
