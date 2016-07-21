@@ -51,7 +51,7 @@ gulp.task('lint', function () {
 
 gulp.task('build-dev', ['lint', 'clean-dev'], function () {
   gulp.src(paths.SRC + paths.FILENAME)
-    .pipe(header(banner, { pkg, pkg }))
+    .pipe(header(banner, { pkg: pkg }))
     .pipe(gulp.dest(paths.DIST));
 });
 
@@ -60,7 +60,7 @@ gulp.task('build-prod', ['lint', 'clean-prod'], function () {
     .pipe(uglify())
     // https://gist.github.com/nodesocket/c33362a8a2efabdbdf36
     .on('error', notify.onError('Error: uglification failed'))
-    .pipe(header(banner, { pkg, pkg }))
+    .pipe(header(banner, { pkg: pkg }))
     .pipe(rename({suffix: paths.MIN}))
     .pipe(gulp.dest(paths.DIST));
 });
