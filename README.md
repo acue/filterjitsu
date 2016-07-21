@@ -4,6 +4,8 @@
 
 [View contributors](https://github.com/Fullscreen/filterjitsu/graphs/contributors)
 
+Filterjitsu will filter just about any elements on the DOM, whether they are `<table>`, `<li>`, `<div>`, or other elements. It filters simply by data attributes, making few assumptions on the structure of your DOM.
+
 ## Demo
 ```shell
  $ python -m SimpleHTTPServer 3000
